@@ -15,6 +15,7 @@ It's recommended to install Tampermonkey, which you can install from following l
 After installed extension, you can download and install this script from these link:
 
 [https://github.com/moontai0724/gather-town-capture-script/raw/main/main.user.js](https://github.com/moontai0724/gather-town-capture-script/raw/main/main.user.js)
+
 [https://greasyfork.org/scripts/430114](https://greasyfork.org/scripts/430114)
 
 ## Usage
