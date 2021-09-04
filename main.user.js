@@ -37,33 +37,37 @@
 
   function download(changeSize = false) {
     setVariables();
-    if (changeSize) changeCanvasSize(elementsId, settings);
+    if (changeSize) changeCanvasSize();
     const canvas = document.createElement("canvas");
     const { height, width } = document.getElementById("canvas");
     canvas.height = height;
     canvas.width = width;
 
     const sources = document.getElementsByTagName("canvas");
-    Promise.all(
-      Array.from(sources).map((element) => {
-        return new Promise(function (resolve, reject) {
-          const image = new Image();
-          image.src = element.toDataURL();
-          image.addEventListener("load", (onImageLoadEvent) => {
-            const imageData = onImageLoadEvent.target;
-            const context = canvas.getContext("2d");
-            context.drawImage(imageData, 0, 0);
-            resolve();
-          });
-        });
-      })
-    ).then(() => {
-      const link = document.createElement("a");
-      link.download = `${document.title.slice(0, -9)} - ${getTime()}.png`;
-      link.href = canvas.toDataURL();
-      link.click();
-      if (changeSize) recoverCanvasSize(elementsId, originalSize);
-    });
+    setTimeout(
+      () =>
+        Promise.all(
+          Array.from(sources).map((element) => {
+            return new Promise(function (resolve, reject) {
+              const image = new Image();
+              image.src = element.toDataURL();
+              image.addEventListener("load", (onImageLoadEvent) => {
+                const imageData = onImageLoadEvent.target;
+                const context = canvas.getContext("2d");
+                context.drawImage(imageData, 0, 0);
+                resolve();
+              });
+            });
+          })
+        ).then(() => {
+          const link = document.createElement("a");
+          link.download = `${document.title.slice(0, -9)} - ${getTime()}.png`;
+          link.href = canvas.toDataURL();
+          link.click();
+          if (changeSize) recoverCanvasSize();
+        }),
+      1000
+    );
   }
 
   function setVariables() {
@@ -89,7 +93,7 @@
     return `${year}-${month}-${date}_${hour}-${minute}-${second}.${millisecond}`;
   }
 
-  function recoverCanvasSize(elementsId, originalSize) {
+  function recoverCanvasSize() {
     elementsId.forEach((elementId) => {
       const element = document.getElementById(elementId);
       element.width = originalSize.canvasWidth;
@@ -99,10 +103,10 @@
     });
   }
 
-  function changeCanvasSize(elementsId, userSettings) {
+  function changeCanvasSize() {
     elementsId.forEach((elementId) => {
       const element = document.getElementById(elementId);
-      const height = userSettings.cellNumber.height * userSettings.scale * 32;
+      const height = settings.cellNumber.height * settings.scale * 32;
       const canvasRatio = element.width / element.height;
       element.width = height * canvasRatio;
       element.height = height;
