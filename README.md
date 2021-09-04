@@ -1,6 +1,6 @@
 # Gather Town Capture Tool
 
-A script to capture current screen without UI on gather.town by pressing "P" key
+A script to capture screen without UI on gather.town in just a press.
 
 ## Getting Started
 
@@ -20,14 +20,38 @@ After installed extension, you can download and install this script from these l
 
 ## Usage
 
-Just simply press "P" button when you're in a map, and it will automatically download an image with filename in following format:
+Just simply press following hoykey when you're in a map, and it will automatically download an image with filename in specific format.
+
+### Set Canvas Zoom
+
+Image resolution will depends on your setting of Canvas Zoom in Settings of Gather Town, which is a gearwheel icon in left bar.
+
+The image resolution is proportional to the canvas zoom size, 400% of manual canvas zoom will got best resolution.
+
+With bigger resolution, it requires more time and perfomence for your browser to render and merge it.
+
+To adjust zoom manually, just turn off `Use Smart Zoom` option.
+
+### Hoykeys
+
+By pressing `Shift + P` will capture current viewpoint.
+
+By pressing `Shift + F` will capture full map.
+
+### Filename Format
 
 ```
-<Map Title> - yyyy_MM_dd HH_mm_ss.SSS
+<Map Title> - yyyy-MM-dd_HH-mm-ss.SSS
 ```
 
 for example:
 
 ```
-COSCUP Party 1 - 2021_07_30 19_47_48.466
+COSCUP Party 1 - 2021-07-30_19-47-48.466
 ```
+
+## Known Issues
+
+We've already known that canvas size has a limitation, when it exceeds the limitation, it will failed to download.
+
+For more info: https://stackoverflow.com/questions/6081483
